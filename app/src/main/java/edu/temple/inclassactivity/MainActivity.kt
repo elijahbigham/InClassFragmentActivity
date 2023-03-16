@@ -2,11 +2,13 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentContainerView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         // Fetch images into IntArray called imageArray
         val typedArray = resources.obtainTypedArray(R.array.image_ids)
@@ -14,6 +16,13 @@ class MainActivity : AppCompatActivity() {
         typedArray.recycle()
 
         // Attach an instance of ImageDisplayFragment using factory method
+        val fragment = ImageDisplayFragment.newInstance(imageArray)
+
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.imageFragment, fragment)
+            .commit()
+
 
     }
 }
